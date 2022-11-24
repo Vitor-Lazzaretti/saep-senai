@@ -1,15 +1,16 @@
-.area_title{
+.venda_title{
     font-size: 20px;
     font-weight: bold;
     color: #000;
     margin-bottom: 20px;
 }
-.area_list_container{
-    margin-bottom: 1em;
+.form_control{
     display: flex;
+    width: 100%;
     justify-content: space-between;
+    margin-bottom: 1em;
 }
-.btn_area{
+.btn_venda{
     width: 100px;
     height: 30px;
     background-color: var(--third-color);
@@ -17,4 +18,14 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+}
+.select{
+    min-width: 70%;
+    border: 1px solid #000;
+}
+.btn_container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-top: 1.5em;
 }
