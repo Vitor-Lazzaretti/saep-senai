@@ -13,7 +13,7 @@ type Error = {
 export default async function handler(
   res: NextApiResponse<Data | Error>
 ) {
-  return conn.query('SELECT * from concessionaria', function (err : string, result: Data, fields) {
+  return conn.promise().query('SELECT * from concessionaria', function (err : string, result: Data) {
     if(err) res.status(500).json({error: err})
     return res.status(200).json(result)
   })
