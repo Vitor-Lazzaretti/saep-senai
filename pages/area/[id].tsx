@@ -14,7 +14,7 @@ export default function Area({}) {
     const [data, setData] = useState([]);
     const formatter = new Intl.NumberFormat('pt-BR');
     useEffect(() => {
-        fetch(`http://localhost:3000/api/automoveis?area=${Router.query.id}`).then((res) => res.json()).then((data) => setData(data));
+        fetch(`/api/automoveis?area=${Router.query.id}`).then((res) => res.json()).then((data) => setData(data));
     }, [Router]);
   return (
     <Modal>
@@ -23,7 +23,7 @@ export default function Area({}) {
             return (
                 <div className={style.area_list_container} key={item.id}>
                     <p>Modelo: {item.modelo} | Preço: R${formatter.format(item.preco/100)}</p>
-                    <button className={style.btn_area}>Vender</button>
+                    <a href={'/venda/'+item.id} className={style.btn_area}>Vender</a>
                 </div>
             )
         })}

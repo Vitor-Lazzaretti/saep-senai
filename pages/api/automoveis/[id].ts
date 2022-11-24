@@ -9,5 +9,6 @@ export default async function handler(
   const { id } = req.query;
 
   const data = await conn.promise().query('SELECT * from Automovel where id = '+id)
-  return res.status(200).json(data[0] ? data[0][0] : null);
+  const alocacao = await conn.promise().query('SELECT * from Alocacao where fk_Automoveis_id = '+id)
+  return res.status(200).json({carro: data[0] ? data[0][0] : null, alocacao: alocacao[0] ? alocacao[0][0] : null});
 }

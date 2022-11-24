@@ -11,19 +11,20 @@ type Automovel = {
 
 export default function Venda({}) {
     const Router = useRouter();
-    const [automovel, setAutomovel] = useState({} as Automovel);
+    const [automovel, setAutomovel] = useState({carro: {} as any, alocacao: {} as any});
     const [venda, setVenda] = useState({clientes: [], concessionarias: []});
     useEffect(() => {
-      fetch(`http://localhost:3000/api/automoveis/${Router.query.id}`).then((res) => res.json()).then((data) => setAutomovel(data));
-      fetch(`http://localhost:3000/api/venda/`).then((res) => res.json()).then((data) => setVenda(data));
+      fetch(`/api/automoveis/${Router.query.id}`).then((res) => res.json()).then((data) => setAutomovel(data));
+      fetch(`/api/venda/`).then((res) => res.json()).then((data) => setVenda(data));
     }, [Router]);
   return (
     <Modal>
-        <h1 className={style.venda_title}>{automovel.modelo}</h1>
+        <h1 className={style.venda_title}>{automovel.carro.modelo} - Quantidade: {automovel.alocacao.quantidade}</h1>
+        <form action={"/api/automoveis/"+Router.query.id} method="post"></form>
         <div className={style.form_control}>
           <label htmlFor="concessionarias">Concessionarias</label>
           <select className={style.select} name="concessionarias" id="concessionarias">
-              {venda.concessionarias.map((item : Automovel) => {
+              {venda.concessionarias.map((item : any) => {
                   return (
                       <option value={item.id}>{item.concessionaria}</option>
                   )
@@ -33,7 +34,7 @@ export default function Venda({}) {
         <div className={style.form_control}>
           <label htmlFor="clientes">Clientes</label>
           <select className={style.select} name="clientes" id="clientes">
-              {venda.clientes.map((item : Automovel) => {
+              {venda.clientes.map((item : any) => {
                   return (
                       <option value={item.id}>{item.Nome}</option>
                   )

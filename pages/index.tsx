@@ -30,7 +30,7 @@ export default function Home() {
   }
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/alocacoes`).then((res) => res.json()).then((data) => setData(data));
+    fetch(`/api/alocacoes`).then((res) => res.json()).then((data) => setData(data));
   }, []);
 
   return (
