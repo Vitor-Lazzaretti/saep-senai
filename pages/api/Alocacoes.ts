@@ -2,19 +2,10 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import conn from './conn/conn'
 
-type Data = [{
-  id: number,
-  concessionaria : string,
-}]
-type Error = {
-  error: string
-}
-
 export default async function handler(
-  res: NextApiResponse<Data | Error>
+  req: NextApiRequest,
+  res: NextApiResponse<any>
 ) {
-  return conn.promise().query('SELECT * from concessionaria', function (err : string, result: Data) {
-    if(err) res.status(500).json({error: err})
-    return res.status(200).json(result)
-  })
+  const data = await conn.promise().query('SELECT * from Alocacao')
+  return res.status(200).json(data[0]);
 }

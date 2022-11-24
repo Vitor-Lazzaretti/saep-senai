@@ -6,6 +6,6 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<any>
 ) {
-  const data = await conn.promise().query('SELECT * from Alocacao')
-  return res.status(200).json(data);
+  const data = await conn.promise().query('SELECT * from concessionaria')
+  return res.status(200).json(data[0]);
 }
