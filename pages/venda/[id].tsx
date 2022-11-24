@@ -17,10 +17,21 @@ export default function Venda({}) {
       fetch(`/api/automoveis/${Router.query.id}`).then((res) => res.json()).then((data) => setAutomovel(data));
       fetch(`/api/venda/`).then((res) => res.json()).then((data) => setVenda(data));
     }, [Router]);
+    function submit(){
+      const form = document.getElementById('form') as HTMLFormElement;
+      const formData = new FormData(form);
+      fetch('/api/alocacoes/'+Router.query.id, {
+        method: 'POST',
+        body: formData
+      }).then((res) => res.json()).then((data) => {
+        alert('Venda realizada com sucesso!');
+        Router.push('/');
+      });
+    }
   return (
     <Modal>
         <h1 className={style.venda_title}>{automovel.carro.modelo} - Quantidade: {automovel.alocacao.quantidade}</h1>
-        <form action={"/api/automoveis/"+Router.query.id} method="post"></form>
+        <form action={"/api/automoveis/"+Router.query.id} id="form" method="post"></form>
         <div className={style.form_control}>
           <label htmlFor="concessionarias">Concessionarias</label>
           <select className={style.select} name="concessionarias" id="concessionarias">
@@ -42,9 +53,7 @@ export default function Venda({}) {
           </select>
         </div>
         <div className={style.btn_container}>
-          <button className={style.btn_venda}>
-            Confirmar
-          </button>
+          <input onClick={()=>submit()} type={'submit'} className={style.btn_venda} value="Confirmar" />
         </div>
     </Modal>
   )
